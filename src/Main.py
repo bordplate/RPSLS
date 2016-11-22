@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
-from Window import Window
+
 from Engine import Engine
+from Scenes.Menu.MenuScene import MenuScene
+from Window import Window
 
 # Start up the engine, given that the
 #   current standard output is not piped.
@@ -13,5 +15,8 @@ if __name__ == '__main__':
         # Create the environment for our game
         window = Window(100, 100)
         engine = Engine(window)
+
+        engine.scene = MenuScene()
+
         engine.start()
         window.exit()
