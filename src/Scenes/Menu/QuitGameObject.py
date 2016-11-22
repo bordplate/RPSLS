@@ -1,4 +1,5 @@
 from Scenes.Menu.MenuObject import *
+import Engine
 
 
 class QuitGameObject(MenuObject):
@@ -19,3 +20,6 @@ class QuitGameObject(MenuObject):
         self.sprite_frames = []
 
         super().load_sprite('sprites/quit-game.txt')
+
+    def activate(self):
+        Engine.EXIT_GAME = True

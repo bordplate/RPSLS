@@ -31,6 +31,8 @@ class MenuScene(Scene):
         elif key == "KEY_LEFT":
             self.menu_items[0].selected = False
             self.rotate_menu_items(-1)
+        elif key == "KEY_ENTER" or "KEY_SPACE":
+            self.menu_items[0].activate()
 
         self.menu_items[0].selected = True
 

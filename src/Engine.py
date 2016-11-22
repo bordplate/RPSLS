@@ -1,6 +1,7 @@
 from time import sleep
 import sys
-import curses
+
+EXIT_GAME = False  # If set to True, the tick-loop will quit the game.
 
 
 class Engine(object):
@@ -50,14 +51,18 @@ class Engine(object):
             making sure it's objects update.
         :return: None
         """
+        if EXIT_GAME:
+            self.exit()
+
         if self.scene:
             self.scene.tick(self.ticks)
 
-            self.window.screen.nodelay(True)
+            self.window.screen.nodelay(True)  # Makes our next keyboard-listening event not stall execution
+            # noinspection PyBroadException
             try:
                 key_press = self.window.screen.getkey()
                 self.scene.key_pressed(key_press)
-            except:
+            except:  # If there is no input, we don't really care.
                 pass
 
         self.ticks += 1
@@ -80,3 +85,11 @@ class Engine(object):
             self.window.draw_text(game_object.sprite, game_object.x, game_object.y)
 
         self.window.refresh()
+
+    def exit(self):
+        """
+        Cleanly exits the game.
+        :return: None
+        """
+        self.running = False
+        self.window.exit()

@@ -55,7 +55,6 @@ class Window(object):
         Reverses the changes made to terminal in setup() and exits the rendering context.
         :return: None
         """
-
         curses.nocbreak()
         self.screen.keypad(False)
         curses.echo()

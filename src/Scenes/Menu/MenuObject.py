@@ -34,3 +34,7 @@ class MenuObject(RenderableObject):
             self.sprite = self.sprite_frames[0]
 
         super().tick(ticks)
+
+    def activate(self):
+        quit()
+        pass
