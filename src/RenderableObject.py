@@ -34,6 +34,8 @@ class RenderableObject(metaclass=ABCMeta):
     def sprite_frames(self) -> []:
         return []
 
+    scene = None  # Scene containing the object.
+
     def __init__(self):
         self.sprite = ""
         self.sprite_index = 0

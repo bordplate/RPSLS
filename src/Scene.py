@@ -17,8 +17,12 @@ class Scene(metaclass=ABCMeta):
         for game_object in self.objects:
             game_object.tick(ticks)
 
+    # TODO: Check if this method ever gets used in a scene.
     @abstractmethod
     def render(self): pass  # Defined in Engine.py
+
+    def change_scene(self, scene):
+        pass
 
     def scene_did_start(self):
         """
@@ -30,11 +34,11 @@ class Scene(metaclass=ABCMeta):
     def scene_will_start(self):
         """
         Fires right before a scene will start, so the scene has a chance to get it's objects ready.
-        :return:
+        :return: None
         """
         pass
 
-    def will_chance_scene(self):
+    def will_change_scene(self):
         """
         Optional method that will fire if the current scene will change.
         Gives the current scene a chance to clean up.
@@ -44,11 +48,22 @@ class Scene(metaclass=ABCMeta):
 
     def key_pressed(self, key: str):
         """
-
-        :param key:
-        :return:
+        Fires if a key has been pressed.
+        :param key: Key pressed as a string. 'F' for the key F, KEY_UP for arrow-key up
+        :return: None
         """
         pass
+
+    def add_objects(self, objects: [RenderableObject]):
+        """
+        Add renderable objects to the screen.
+        :param objects: A list containing multiple RenderableObject
+        :return: None
+        """
+        self.objects += objects
+
+        for scene_object in objects:
+            scene_object.scene = self
 
     def __init__(self):
         self.objects = []

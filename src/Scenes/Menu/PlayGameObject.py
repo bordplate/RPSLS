@@ -1,4 +1,5 @@
-from Scenes.Menu.MenuObject import *
+from Scenes.Menu.MenuObject import MenuObject
+from Scenes.Game.GameScene import GameScene
 
 
 class PlayGameObject(MenuObject):
@@ -19,3 +20,8 @@ class PlayGameObject(MenuObject):
         self.sprite_frames = []
 
         super().load_sprite('sprites/play-game.txt')
+
+    def activate(self):
+        # Prepare game scene and tell the engine to start it.
+        game_scene = GameScene()
+        self.scene.change_scene(game_scene)

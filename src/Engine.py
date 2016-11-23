@@ -1,6 +1,8 @@
 from time import sleep
 import sys
 
+from Scene import Scene
+
 EXIT_GAME = False  # If set to True, the tick-loop will quit the game.
 
 
@@ -27,7 +29,7 @@ class Engine(object):
         """
         self.running = True
         if self.scene:
-            self.scene.scene_will_start()
+            self.setup_scene(self.scene)
         self.run()
 
     def run(self):
@@ -51,7 +53,7 @@ class Engine(object):
             making sure it's objects update.
         :return: None
         """
-        if EXIT_GAME:
+        if EXIT_GAME:  # We have to cheat a little to have less friction just to exit the game.
             self.exit()
 
         if self.scene:
@@ -79,12 +81,11 @@ class Engine(object):
         if self.scene:
             self.scene.render()
 
-        self.window.clear_screen()
+        self.window.clear_screen()  # Clean up screen, otherwise we're left with artifacts.
 
+        # Go through all renderable objects in scene and render them on screen.
         for game_object in self.scene.objects:
             self.window.draw_text(game_object.sprite, game_object.x, game_object.y)
-
-        self.window.refresh()
 
     def exit(self):
         """
@@ -92,4 +93,11 @@ class Engine(object):
         :return: None
         """
         self.running = False
-        self.window.exit()
+
+    def setup_scene(self, scene: Scene):
+        scene.scene_will_start()
+        scene.change_scene = self.change_scene
+
+    def change_scene(self, scene: Scene):
+        self.setup_scene(scene)
+        self.scene = scene

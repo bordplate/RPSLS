@@ -47,9 +47,6 @@ class Window(object):
         for i, string in enumerate(text.split("\n")):
             self.screen.addstr(y+i, x, string)  # Curses has reversed the standard order of x,y for some reason.
 
-    def refresh(self):
-        self.screen.refresh()
-
     def exit(self):
         """
         Reverses the changes made to terminal in setup() and exits the rendering context.

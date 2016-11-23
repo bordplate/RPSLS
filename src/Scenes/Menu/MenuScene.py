@@ -16,10 +16,10 @@ class MenuScene(Scene):
         super().tick(ticks)
 
     def scene_will_start(self):
-        self.objects += self.menu_items
-        self.menu_items[0].selected = True
+        self.add_objects(self.menu_items)
+        self.menu_items[0].selected = True  # Activate the first menu item.
 
-    def will_chance_scene(self):
+    def will_change_scene(self):
         pass
 
     def key_pressed(self, key: str):
