@@ -26,15 +26,15 @@ class MenuScene(Scene):
         super().key_pressed(key)
 
         if key == "KEY_RIGHT":
-            self.menu_items[0].selected = False
+            self.menu_items[0].set_selected(False)
             self.rotate_menu_items(1)
         elif key == "KEY_LEFT":
-            self.menu_items[0].selected = False
+            self.menu_items[0].set_selected(False)
             self.rotate_menu_items(-1)
         elif key == "\n" or key == " ":
             self.menu_items[0].activate()
 
-        self.menu_items[0].selected = True
+        self.menu_items[0].set_selected(True)
 
     def rotate_menu_items(self, times):
         self.menu_items = self.menu_items[times:] + self.menu_items[:times]

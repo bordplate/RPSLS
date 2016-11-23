@@ -1,5 +1,4 @@
-from abc import ABCMeta, abstractmethod, abstractproperty
-from collections import namedtuple
+from abc import ABCMeta, abstractmethod, abstractproperty, abstractclassmethod
 
 
 class RenderableObject(metaclass=ABCMeta):
@@ -40,12 +39,14 @@ class RenderableObject(metaclass=ABCMeta):
         self.sprite_index = 0
         self.sprite_frames = []
 
-    @abstractmethod
     def next_sprite_frame(self):
-        if self.sprite_index >= len(self.sprite_frames)-1:
+        self.sprite_index += 1
+
+        if self.sprite_index >= len(self.sprite_frames):
             self.sprite_index = 0
 
-        self.sprite = self.sprite_frames[self.sprite_index]
+        if len(self.sprite_frames) > 0:
+            self.sprite = self.sprite_frames[self.sprite_index]
 
     def tick(self, ticks):
         pass
