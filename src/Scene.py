@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod, abstractproperty
+from abc import ABCMeta, abstractmethod
 from RenderableObject import RenderableObject
 
 
@@ -8,9 +8,7 @@ class Scene(metaclass=ABCMeta):
     Inherit this class to create a new scene.
     """
 
-    @abstractproperty
-    def objects(self) -> [RenderableObject]:
-        pass
+    objects = []  # type: [RenderableObject]
 
     @abstractmethod
     def tick(self, ticks):

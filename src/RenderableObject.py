@@ -1,47 +1,25 @@
-from abc import ABCMeta, abstractmethod, abstractproperty, abstractclassmethod
+from abc import ABCMeta
 
 
 class RenderableObject(metaclass=ABCMeta):
-    @abstractproperty
-    def x(self) -> int:
-        """
-        Holds the current x-position, on screen, for the object.
-        :return: None
-        """
-        pass
+    x = 0
+    y = 0
 
-    @abstractproperty
-    def y(self) -> int:
-        """
-        Holds the current y-position, on screen, for the object.
-        :return: None
-        """
-        pass
-
-    @abstractproperty
-    def sprite(self) -> str:
-        """
-        Holds the sprite (ASCII sprites) for the object.
-        :return:
-        """
-        pass
-
-    @abstractproperty
-    def sprite_index(self) -> int:
-        return 0
-
-    @abstractproperty
-    def sprite_frames(self) -> []:
-        return []
+    sprite = ""
+    sprite_frames = []
+    sprite_index = 0
+    sprite_style = 0
 
     scene = None  # Scene containing the object.
 
     def __init__(self):
-        self.sprite = ""
-        self.sprite_index = 0
-        self.sprite_frames = []
+        pass
 
     def next_sprite_frame(self):
+        """
+        Sets the sprite to the next animation frame. Wraps around if needed.
+        :return: None
+        """
         self.sprite_index += 1
 
         if self.sprite_index >= len(self.sprite_frames):
@@ -54,6 +32,11 @@ class RenderableObject(metaclass=ABCMeta):
         pass
 
     def load_sprite(self, filename):
+        """
+        Loads a sprite into this object.
+        :param filename: Path to the sprite
+        :return: None
+        """
         file_contents = open(filename, 'r').read()
         frames = file_contents.split("\n-\n")
 

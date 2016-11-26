@@ -1,5 +1,5 @@
 from Scenes.Menu.MenuObject import MenuObject
-from Scenes.Game.GameScene import GameScene
+from Scenes.PlayerMode.PlayerModeScene import PlayerModeScene
 
 
 class PlayGameObject(MenuObject):
@@ -23,5 +23,5 @@ class PlayGameObject(MenuObject):
 
     def activate(self):
         # Prepare game scene and tell the engine to start it.
-        game_scene = GameScene()
-        self.scene.change_scene(game_scene)
+        player_mode_scene = PlayerModeScene()
+        self.scene.change_scene(player_mode_scene)

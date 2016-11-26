@@ -18,7 +18,7 @@ else:
         import pydevd
 
         # Start debugging
-        pydevd.settrace('localhost', port=34564, stdoutToServer=False, stderrToServer=True)
+        pydevd.settrace('localhost', port=34564, stdoutToServer=False, stderrToServer=True, suspend=False)
         os.environ['TERM'] = 'xterm'  # pydevd breaks this environment var, this fixes it again.
 
     # Create the environment for our game

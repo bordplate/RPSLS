@@ -85,7 +85,7 @@ class Engine(object):
 
         # Go through all renderable objects in scene and render them on screen.
         for game_object in self.scene.objects:
-            self.window.draw_text(game_object.sprite, game_object.x, game_object.y)
+            self.window.draw_text(game_object.sprite, game_object.x, game_object.y, game_object.sprite_style)
 
     def exit(self):
         """

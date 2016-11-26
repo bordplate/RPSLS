@@ -35,17 +35,18 @@ class Window(object):
         """
         self.screen.clear()
 
-    def draw_text(self, text: str, x: int, y: int):
+    def draw_text(self, text: str, x: int, y: int, mode=0):
         """
         Draws text on the screen at coordinates.
         Note that if we don't split them by newline, the newline will render at the far left of the screen.
         :param text: The text you want rendered on sceen.
         :param x: x position
         :param y: y position
+        :param mode: Text mode
         :return: None
         """
         for i, string in enumerate(text.split("\n")):
-            self.screen.addstr(y+i, x, string)  # Curses has reversed the standard order of x,y for some reason.
+            self.screen.addstr(y+i, x, string, mode)  # Curses has reversed the standard order of x,y for some reason.
 
     def exit(self):
         """

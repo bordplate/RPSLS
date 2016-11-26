@@ -1,5 +1,5 @@
 from Scenes.Menu.MenuObject import *
-import Engine
+import Engine  # A bit nasty, but seems to be the cleanest way to do this
 
 
 class QuitGameObject(MenuObject):

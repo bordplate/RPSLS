@@ -5,8 +5,6 @@ from Scenes.Menu.QuitGameObject import QuitGameObject
 
 
 class MenuScene(Scene):
-    objects = []
-
     menu_items = [PlayGameObject(), InstructionsObject(), QuitGameObject()]
 
     def render(self):
@@ -33,6 +31,8 @@ class MenuScene(Scene):
             self.rotate_menu_items(-1)
         elif key == "\n" or key == " ":
             self.menu_items[0].activate()
+        elif key == 'q':
+            QuitGameObject().activate()  # Easier to do this than the ugly Engine-importing trick
 
         self.menu_items[0].set_selected(True)
 
