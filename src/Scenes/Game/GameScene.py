@@ -157,8 +157,11 @@ class GameScene(Scene):
                 monster = monster_object.value
                 monster = monster()  # Python wasn't too happy with instantiating on the above line.
 
-                monster.y = 2
-                monster.x = 2 + (20 * i)
+                monster.y = 7
+                monster.x = 2
+
+                if len(self.monsters) > 0:
+                    monster.x += self.monsters[i-1].x + self.monsters[i-1].width
 
                 self.add_objects([monster])
                 self.monsters += [monster]
