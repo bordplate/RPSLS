@@ -99,8 +99,12 @@ class Engine(object):
         self.running = False
 
     def setup_scene(self, scene: Scene):
-        scene.scene_will_start()
         scene.change_scene = self.change_scene
+
+        scene.width = self.window.width
+        scene.height = self.window.height
+
+        scene.scene_will_start()
 
     def change_scene(self, scene: Scene):
         self.setup_scene(scene)

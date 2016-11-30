@@ -28,8 +28,10 @@ class Window(object):
         # Create the window
         self.window = curses.newwin(self.height, self.width, 0, 0)
 
+        self.window.resize(self.height, self.width)
+
     def terminal_size_ok(self) -> bool:
-        max_y, max_x = self.window.getmaxyx()
+        max_y, max_x = self.screen.getmaxyx()
 
         if max_y < self.height or max_x < self.width:
             self.screen.clear()
@@ -54,15 +56,21 @@ class Window(object):
             self.safe_addstr(y, 0, "█")
             self.safe_addstr(y, self.width-1, "█")
 
+        self.safe_addstr(0, 0, str(self.window.getmaxyx()[0]))
+        self.safe_addstr(1, 0, str(self.window.getmaxyx()[1]))
+
     def safe_addstr(self, y, x, string, mode=0):
-        if y < self.height and x < self.width:
+        max_y, max_x = self.screen.getmaxyx()
+        if max_y-1 > y >= 0 and max_x-1 > x >= 0:
             self.screen.addstr(y, x, string, mode)
+        else:
+            self.window.resize(max_y, max_x)
 
     def draw_text(self, text: str, x: int, y: int, mode=0):
         """
         Draws text on the screen at coordinates.
         Note that if we don't split them by newline, the newline will render at the far left of the screen.
-        :param text: The text you want rendered on sceen.
+        :param text: The text you want rendered on screen.
         :param x: x position
         :param y: y position
         :param mode: Text mode

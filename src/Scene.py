@@ -10,6 +10,9 @@ class Scene(metaclass=ABCMeta):
 
     objects = []  # type: [RenderableObject]
 
+    width = 0
+    height = 0
+
     @abstractmethod
     def tick(self, ticks):
         for game_object in self.objects:

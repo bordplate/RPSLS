@@ -5,7 +5,7 @@ from Scenes.Snake.SnakeTail import SnakeTail
 
 
 class SnakeObject(RenderableObject):
-    tail = [SnakeTail(Direction.right)]
+    tail = []
 
     movement_stack = [Direction.right]
 
@@ -17,6 +17,7 @@ class SnakeObject(RenderableObject):
         super().__init__()
 
         self.x = 1
+        self.y = 2
 
         self.sprite = ">"
 

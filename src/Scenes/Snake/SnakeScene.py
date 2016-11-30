@@ -14,9 +14,9 @@ class SnakeScene(Scene):
 
     def scene_will_start(self):
         self.add_objects([self.snake])
-        self.add_objects(self.snake.tail)
+        self.snake.add_tail_part()
 
-        self.food = SnakeFood(x=randint(0, 30), y=randint(0, 40))
+        self.food = SnakeFood(x=randint(1, self.width-1), y=randint(1, self.height-1))
 
         self.add_objects([self.food])
 
@@ -29,7 +29,7 @@ class SnakeScene(Scene):
 
                 self.snake.add_tail_part()
 
-                self.food = SnakeFood(x=randint(0, 30), y=randint(0, 30))
+                self.food = SnakeFood(x=randint(0, 69), y=randint(0, 24))
 
                 self.add_objects([self.food])
 

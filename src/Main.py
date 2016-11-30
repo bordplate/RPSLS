@@ -22,7 +22,7 @@ else:
         os.environ['TERM'] = 'xterm'  # pydevd breaks this environment var, this fixes it again.
 
     # Create the environment for our game
-    window = Window(70, 25)
+    window = Window(90, 30)
     engine = Engine(window)
 
     engine.scene = MenuScene()  # First scene in the game.
