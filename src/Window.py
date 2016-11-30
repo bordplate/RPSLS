@@ -56,9 +56,6 @@ class Window(object):
             self.safe_addstr(y, 0, "█")
             self.safe_addstr(y, self.width-1, "█")
 
-        self.safe_addstr(0, 0, str(self.window.getmaxyx()[0]))
-        self.safe_addstr(1, 0, str(self.window.getmaxyx()[1]))
-
     def safe_addstr(self, y, x, string, mode=0):
         max_y, max_x = self.screen.getmaxyx()
         if max_y-1 > y >= 0 and max_x-1 > x >= 0:
