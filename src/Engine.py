@@ -78,6 +78,10 @@ class Engine(object):
             This might give the scene a chance to do any pre-render actions if necessary.
         :return: None
         """
+        if not self.window.terminal_size_ok():
+            self.window.draw_text("Please make your terminal bigger", 0, 0)
+            return
+
         if self.scene:
             self.scene.render()
 

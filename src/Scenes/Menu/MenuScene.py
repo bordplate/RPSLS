@@ -2,10 +2,11 @@ from Scene import Scene
 from Scenes.Menu.PlayGameObject import PlayGameObject
 from Scenes.Menu.InstructionsObject import InstructionsObject
 from Scenes.Menu.QuitGameObject import QuitGameObject
+from Scenes.Menu.PlaySnakeObject import PlaySnakeObject
 
 
 class MenuScene(Scene):
-    menu_items = [PlayGameObject(), InstructionsObject(), QuitGameObject()]
+    menu_items = [PlayGameObject(), InstructionsObject(), QuitGameObject(), PlaySnakeObject()]
 
     def render(self):
         pass

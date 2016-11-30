@@ -16,6 +16,11 @@ class Monster(RenderableObject):
     animation_frequency = 10
     newly_selected = False
 
+    exploding = False
+
+    # Defining the callback function as a variable here suppresses Pycharm warnings.
+    explosion_animation_did_end = None  # type: def
+
     def __init__(self):
         super().__init__()
 
@@ -30,6 +35,19 @@ class Monster(RenderableObject):
         self.selected = value
         self.newly_selected = value
 
+        if not value:
+            self.sprite = self.sprite_frames[0]
+
+    def explode(self, callback=lambda: None):
+        """
+        Explodes the sprite.
+        :param callback: Defaults to lambda: None, so we never have to check if the callback has a value.
+        :return: None
+        """
+        self.load_sprite("sprites/explosion.txt")
+        self.exploding = True
+        self.explosion_animation_did_end = callback
+
     def tick(self, ticks):
         if self.selected:
             # Perform a check to see if this item was just selected.
@@ -41,8 +59,15 @@ class Monster(RenderableObject):
             # Animate the icon every 10th tick.
             if ticks % 10 == self.animation_frequency:
                 self.next_sprite_frame()
-        else:
-            self.sprite = self.sprite_frames[0]  # Not selected, so just set the icon to first frame,
-            # performance penalties too low to care about
+
+        if self.exploding:
+            if self.sprite_index >= len(self.sprite_frames)-2:
+                self.exploding = False
+                self.sprite = ""
+
+                self.explosion_animation_did_end()
+
+            if ticks % 3:
+                self.next_sprite_frame()
 
         super().tick(ticks)

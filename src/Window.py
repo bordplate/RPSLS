@@ -28,12 +28,35 @@ class Window(object):
         # Create the window
         self.window = curses.newwin(self.height, self.width, 0, 0)
 
+    def terminal_size_ok(self) -> bool:
+        max_y, max_x = self.window.getmaxyx()
+
+        if max_y < self.height or max_x < self.width:
+            self.screen.clear()
+            return False
+
+        return True
+
     def clear_screen(self):
         """
         Clears the screen, so it's ready for new draws.
         :return: None
         """
         self.screen.clear()
+
+        # Create border at top and bottom
+        for x in range(0, self.width):
+            self.safe_addstr(0, x, "█")
+            self.safe_addstr(self.height-1, x, "█")
+
+        # Create border left and right
+        for y in range(0, self.height):
+            self.safe_addstr(y, 0, "█")
+            self.safe_addstr(y, self.width-1, "█")
+
+    def safe_addstr(self, y, x, string, mode=0):
+        if y < self.height and x < self.width:
+            self.screen.addstr(y, x, string, mode)
 
     def draw_text(self, text: str, x: int, y: int, mode=0):
         """
@@ -46,7 +69,7 @@ class Window(object):
         :return: None
         """
         for i, string in enumerate(text.split("\n")):
-            self.screen.addstr(y+i, x, string, mode)  # Curses has reversed the standard order of x,y for some reason.
+            self.safe_addstr(y+i, x, string, mode)  # Curses has reversed the standard order of x,y for some reason.
 
     def exit(self):
         """

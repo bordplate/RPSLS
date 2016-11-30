@@ -1,5 +1,7 @@
 from Scene import Scene
+
 from Scenes.PlayerMode.PlayerModeObject import *
+
 import Scenes.Menu.MenuScene
 import Scenes.Game.GameScene
 
@@ -9,12 +11,11 @@ class PlayerModeScene(Scene):
 
     def scene_will_start(self):
         # Set up both modes correctly on the screen
-        self.play_modes[0].x = 2
-        self.play_modes[0].y = 2
+        self.play_modes[0].set_position(x=2, y=2)
         self.play_modes[0].set_selected(True)
 
-        self.play_modes[1].x = 40
-        self.play_modes[1].y = 2
+        self.play_modes[1].set_position(x=40, y=2)
+        self.play_modes[1].set_selected(False)
 
         # Add both to list of objects
         self.add_objects(self.play_modes)

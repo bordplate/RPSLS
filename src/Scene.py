@@ -63,5 +63,10 @@ class Scene(metaclass=ABCMeta):
         for scene_object in objects:
             scene_object.scene = self
 
+    def remove_object(self, scene_object: RenderableObject):
+        for obj in self.objects:
+            if obj == scene_object:
+                self.objects.remove(obj)
+
     def __init__(self):
         self.objects = []
