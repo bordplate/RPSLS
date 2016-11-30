@@ -170,16 +170,18 @@ class GameScene(Scene):
 
             self.monsters[0].set_selected(True)
         elif stage == Stage.shaking:
+            screen_center = int(self.width / 2)
+
             # Add shaking hands to screen
             hand_left = Hand()
             hand_right = Hand()
 
-            hand_left.set_position(x=2, y=2)
+            hand_left.set_position(x=screen_center-hand_left.width-10, y=5)
 
             # If one hand has stopped animating, assume both have
             hand_left.animation_did_end = self.hand_stopped_animating
 
-            hand_right.set_position(x=20, y=2)
+            hand_right.set_position(x=screen_center+10, y=5)
             hand_right.flip_sprite()
 
             self.add_objects([hand_left, hand_right])
@@ -187,12 +189,14 @@ class GameScene(Scene):
             hand_left.start_animating()
             hand_right.start_animating()
         elif stage == Stage.announce:
+            screen_center = int(self.width / 2)
+
             player1_monster = self.selected_monsters[Player.player1]  # type: Monster
             player2_monster = self.selected_monsters[Player.player2]  # type: Monster
 
-            player1_monster.set_position(x=2, y=2)
+            player1_monster.set_position(x=screen_center-player1_monster.width-10, y=5)
 
-            player2_monster.set_position(x=30, y=2)
+            player2_monster.set_position(x=screen_center+10, y=5)
             player2_monster.flip_sprite()
 
             player1_attack = player2_monster.id_mask & player1_monster.attack_mask

@@ -6,6 +6,7 @@ from random import randint
 from Scenes.Snake.SnakeObject import SnakeObject
 from Scenes.Snake.Direction import Direction
 from Scenes.Snake.SnakeFood import SnakeFood
+from Scenes.Snake.SnakeTail import SnakeTail
 
 
 class SnakeScene(Scene):
@@ -40,7 +41,7 @@ class SnakeScene(Scene):
 
                 self.snake.add_tail_part()
 
-                self.food = SnakeFood(x=randint(1, self.width-1), y=randint(1, self.height-1))
+                self.food = SnakeFood(x=randint(1, self.width-2), y=randint(1, self.height-2))
 
                 self.add_objects([self.food])
 

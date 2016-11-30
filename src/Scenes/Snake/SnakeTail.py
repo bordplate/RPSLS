@@ -21,3 +21,12 @@ class SnakeTail(RenderableObject):
 
     def tick(self, ticks):
         super().tick(ticks)
+
+        if self.x <= 0:
+            self.x = self.scene.width - 2
+        elif self.x >= self.scene.width - 1:
+            self.x = 1
+        elif self.y <= 0:
+            self.y = self.scene.height - 2
+        elif self.y >= self.scene.height - 1:
+            self.y = 1

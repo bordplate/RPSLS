@@ -21,11 +21,31 @@ else:
         pydevd.settrace('localhost', port=34564, stdoutToServer=False, stderrToServer=True, suspend=False)
         os.environ['TERM'] = 'xterm'  # pydevd breaks this environment var, this fixes it again.
 
-    # Create the environment for our game
-    window = Window(87, 20)
-    engine = Engine(window)
+        # Create the environment for our game
+        window = Window(87, 20)
+        engine = Engine(window)
 
-    engine.scene = MenuScene()  # First scene in the game.
+        engine.scene = MenuScene()  # First scene in the game.
 
-    engine.start()  # Starts the main game loop.
-    window.exit()  # Engine has stopped. Clean and exit window.
+        engine.start()  # Starts the main game loop.
+        window.exit()  # Engine has stopped. Clean and exit window.
+    elif len(sys.argv) > 1 and sys.argv[1] == "snake":
+        from Scenes.Snake.SnakeScene import SnakeScene
+
+        # Create the environment for our game
+        window = Window(87, 20)
+        engine = Engine(window)
+
+        engine.scene = SnakeScene()  # First scene in the game.
+
+        engine.start()  # Starts the main game loop.
+        window.exit()  # Engine has stopped. Clean and exit window.
+    else:
+        # Create the environment for our game
+        window = Window(87, 20)
+        engine = Engine(window)
+
+        engine.scene = MenuScene()  # First scene in the game.
+
+        engine.start()  # Starts the main game loop.
+        window.exit()  # Engine has stopped. Clean and exit window.
