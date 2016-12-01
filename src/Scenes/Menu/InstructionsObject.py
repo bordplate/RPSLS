@@ -1,5 +1,6 @@
 from Scenes.Menu.MenuObject import *
 
+from Scenes.Instructions.InstructionsScene import InstructionsScene
 
 class InstructionsObject(MenuObject):
     sprite = ""
@@ -18,4 +19,9 @@ class InstructionsObject(MenuObject):
         self.sprite_index = 0
         self.sprite_frames = []
 
-        super().load_sprite('sprites/instructions.txt')
+        super().load_sprite('sprites/open-instructions.txt')
+
+    def activate(self):
+        super().activate()
+
+        self.scene.change_scene(InstructionsScene())

@@ -25,3 +25,5 @@ class PlaySnakeObject(MenuObject):
         # Prepare game scene and tell the engine to start it.
         snake_scene = SnakeScene()
         self.scene.change_scene(snake_scene)
+
+        super().activate()

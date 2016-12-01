@@ -19,6 +19,9 @@ class SnakeObject(RenderableObject):
         self.x = 1
         self.y = 2
 
+        self.tail = []
+        self.movement_stack = [Direction.right]  # Python does or does not do some garbage collection here that I need it to do
+
         self.sprite = ">"
 
     def set_direction(self, direction: Direction):
@@ -44,6 +47,9 @@ class SnakeObject(RenderableObject):
 
     def tick(self, ticks):
         super().tick(ticks)
+
+        if self.scene.game_over:
+            return
 
         if ticks % 2 == 0:
             self.movement_stack += [self.direction]
@@ -75,6 +81,7 @@ class SnakeObject(RenderableObject):
                 self.halt_tail = False
 
             self.movement_stack = self.movement_stack[-len(self.tail):]  # Shave off unnecessary overhead. For memory.
+            self.tail[0].new = False
 
             if self.x <= 0:
                 self.x = self.scene.width - 2

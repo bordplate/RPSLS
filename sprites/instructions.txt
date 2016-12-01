@@ -1,13 +1,13 @@
-  _.---.---._
- /     |     \
-/______|______\
-'------V------'
+     - Rock, Paper, Scissors, Lizard, Spock -
+    Choose between characters with arrow keys,
+    and press space or enter when you want to
+              select a character.
 
- Instructions
--
+            - Who takes out who? -
+       Rock takes out Scissors and Lizard
+         Paper takes out Rock and Spock
+      Scissors takes out Paper and Lizard
+       Lizard takes out Spock and Paper
+        Spock takes out Paper and Rock
 
-  _.---.---._
- /     |     \
-/______|______\
-'------V------'
- Instructions
+Exit these instructions and menus with the Q-key

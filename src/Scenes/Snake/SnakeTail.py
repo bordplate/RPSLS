@@ -6,10 +6,13 @@ from Scenes.Snake.Direction import Direction
 class SnakeTail(RenderableObject):
     direction = Direction.right
 
+    new = True
+
     def __init__(self, direction: Direction):
         super().__init__()
 
         self.set_direction(direction)
+        self.new = True
 
     def set_direction(self, direction: Direction):
         self.direction = direction
@@ -21,6 +24,9 @@ class SnakeTail(RenderableObject):
 
     def tick(self, ticks):
         super().tick(ticks)
+
+        if self.scene.game_over:
+            return
 
         if self.x <= 0:
             self.x = self.scene.width - 2

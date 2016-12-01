@@ -25,7 +25,7 @@ class MenuObject(RenderableObject):
     def set_selected(self, value: bool):
         """
         Sets this object to the specified value and starts animating
-        :param value: Wether or not to be selected.
+        :param value: Whether or not to be selected.
         :return: None
         """
         self.selected = value
@@ -44,9 +44,9 @@ class MenuObject(RenderableObject):
                 self.next_sprite_frame()
         else:
             self.sprite = self.sprite_frames[0]  # Not selected, so just set the icon to first frame,
-            # performance penalties too low to care about
+            # Performance penalties too low to care about
 
         super().tick(ticks)
 
     def activate(self):
-        pass
+        self.set_selected(False)

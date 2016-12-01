@@ -23,3 +23,5 @@ class QuitGameObject(MenuObject):
 
     def activate(self):
         Engine.EXIT_GAME = True
+
+        super().activate()

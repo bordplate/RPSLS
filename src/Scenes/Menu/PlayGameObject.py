@@ -25,3 +25,5 @@ class PlayGameObject(MenuObject):
         # Prepare game scene and tell the engine to start it.
         player_mode_scene = PlayerModeScene()
         self.scene.change_scene(player_mode_scene)
+
+        super().activate()

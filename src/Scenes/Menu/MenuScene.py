@@ -40,12 +40,13 @@ class MenuScene(Scene):
         elif key == "KEY_LEFT":
             self.menu_items[0].set_selected(False)
             self.rotate_menu_items(-1)
-        elif key == "\n" or key == " ":
-            self.menu_items[0].activate()
         elif key == 'q':
             QuitGameObject().activate()  # Easier to do this than the ugly Engine-importing trick
 
         self.menu_items[0].set_selected(True)
+
+        if key == "\n" or key == " ":
+            self.menu_items[0].activate()
 
     def rotate_menu_items(self, times):
         self.menu_items = self.menu_items[times:] + self.menu_items[:times]
