@@ -13,8 +13,8 @@ class QuitGameObject(MenuObject):
     def __init__(self):
         super().__init__()
 
-        self.x = 39
-        self.y = 2
+        self.x = 50
+        self.y = 12
         self.sprite = ""
         self.sprite_index = 0
         self.sprite_frames = []

@@ -1,0 +1,5 @@
+***************************
+*       Welcome to        *
+*  Rock, Paper, Scissors  *
+*     Lizard, Spock       *
+***************************

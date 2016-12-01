@@ -1,4 +1,5 @@
 from Scene import Scene
+from RenderableObject import RenderableObject
 
 from Scenes.PlayerMode.PlayingType import PlayingType
 from Scenes.Game.Hand import Hand
@@ -47,6 +48,8 @@ class GameScene(Scene):
     done_announcing = False
 
     restart_dialog = None  # type: RestartDialog
+
+    picking_label = RenderableObject()
 
     def __init__(self, playing_type: PlayingType):
         super().__init__()
@@ -113,6 +116,8 @@ class GameScene(Scene):
 
             if self.playing_type == PlayingType.single_player:
                 self.select_monster(Player.player2, choice(self.monsters))  # Make AI pick a monster
+
+            self.picking_label.sprite = "Player 2, it's your turn to pick a character"
         else:
             self.set_stage(Stage.shaking)
 
@@ -151,6 +156,11 @@ class GameScene(Scene):
             self.restart_dialog = None
 
             self.currently_selecting = Player.player1  # Player 1 will always start picking
+
+            self.picking_label.set_position(x=3, y=2)
+            self.picking_label.sprite = "Player 1, please pick a character"
+
+            self.add_objects([self.picking_label])
 
             i = 0
             for monster_object in Monsters:  # type: Monsters

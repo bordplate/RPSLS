@@ -1,4 +1,6 @@
 from Scene import Scene
+from RenderableObject import RenderableObject
+
 from Scenes.Menu.PlayGameObject import PlayGameObject
 from Scenes.Menu.InstructionsObject import InstructionsObject
 from Scenes.Menu.QuitGameObject import QuitGameObject
@@ -17,6 +19,14 @@ class MenuScene(Scene):
     def scene_will_start(self):
         self.add_objects(self.menu_items)
         self.menu_items[0].selected = True  # Activate the first menu item.
+
+        menu_text = RenderableObject()
+        menu_text.load_sprite("sprites/menu_text.txt")
+
+        menu_text.y = 4
+        menu_text.x = int(self.width / 2) - int(menu_text.width / 2)
+
+        self.add_objects([menu_text])
 
     def will_change_scene(self):
         pass

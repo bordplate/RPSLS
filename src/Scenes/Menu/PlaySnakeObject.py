@@ -13,8 +13,8 @@ class PlaySnakeObject(MenuObject):
     def __init__(self):
         super().__init__()
 
-        self.x = 55
-        self.y = 2
+        self.x = 69
+        self.y = 12
         self.sprite = ""
         self.sprite_index = 0
         self.sprite_frames = []
