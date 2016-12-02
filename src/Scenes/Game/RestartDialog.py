@@ -2,6 +2,10 @@ from RenderableObject import RenderableObject
 
 
 class RestartDialog(RenderableObject):
+    """
+    A dialog that prompts the user to restart or not.
+    Also shows who won the game.
+    """
     selection = "Yes"
 
     def next_selection(self):
@@ -16,6 +20,11 @@ class RestartDialog(RenderableObject):
             self.selection = "Yes"
 
     def __init__(self, winner: int):
+        """
+        Loads the dialog sprite and replaces the placeholer "Player N" with actual winner of the game.
+        Unless tie, then it replaces the entire "Player N wins!" with "That is a tie!"
+        :param winner: The winner of the game
+        """
         super().__init__()
 
         self.load_sprite("sprites/restart.txt")
@@ -30,5 +39,3 @@ class RestartDialog(RenderableObject):
                 self.sprite_frames[i] = sprite.replace("Player N wins!", "That is a tie!")
 
         self.sprite = self.sprite_frames[0]
-
-    pass

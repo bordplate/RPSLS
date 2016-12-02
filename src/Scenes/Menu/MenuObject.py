@@ -1,37 +1,38 @@
-from RenderableObject import *
+from RenderableObject import RenderableObject
 
 
 class MenuObject(RenderableObject):
-    x = 0
-    y = 0
-    sprite = ""
-    sprite_index = 0
-    sprite_frames = []
-
     selected = False  # If this is the selected menu item
     newly_selected = False
 
     animation_frequency = 0
 
     def __init__(self):
+        """
+        Sets the standard x,y-position on initiation.
+        """
         super().__init__()
 
         self.x = 3
         self.y = 2
-        self.sprite = ""
-        self.sprite_index = 0
-        self.sprite_frames = []
 
     def set_selected(self, value: bool):
         """
         Sets this object to the specified value and starts animating
-        :param value: Whether or not to be selected.
+        Sets self.newly_selected to true, if it should start animating.
+            This makes us able to start animating first tick after it has been selected.
+        :param value: Whether or not this object is selected.
         :return: None
         """
         self.selected = value
         self.newly_selected = value
 
-    def tick(self, ticks):
+    def tick(self, ticks: int):
+        """
+        Animtes the icon if appropriate.
+        :param ticks: Engine tick count
+        :return: None
+        """
         if self.selected:
             # Perform a check to see if this item was just selected.
             # This is done to start animating the icon right away, so the user doesn't think the program is frozen.
@@ -49,4 +50,9 @@ class MenuObject(RenderableObject):
         super().tick(ticks)
 
     def activate(self):
+        """
+        Overridden in sub-classes. This method is called when a menu object is activated (e.g. user pressed enter)
+        Sets itself to false, so it stops animating.
+        :return: None
+        """
         self.set_selected(False)

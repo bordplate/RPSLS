@@ -4,6 +4,21 @@ from abc import abstractproperty
 
 
 class Monster(RenderableObject):
+    """
+    Selectable character that players can pick.
+    Inherit this class to create a new monster, this class should not start up by it's own.
+
+    All monsters have their own "id" bitmask that is their line of defense, e.g. 00100
+    All monsters also have their own "attack" bitmask that they use when "attacking" other monsters, e.g. 10100
+
+    The idea is to check if one monster's attack "flips" the bits in another monster's "id". If the ID-bit flips,
+        that monster is dead.
+    The actual implementation is a bit different.
+    """
+
+    # id_mask and attack_mask are must have in inherited classes, and basically the only thing they need.
+    # id_mask should only have 1 bit set. attack_mask should have 2 bits set, which should "overwrite"
+
     @abstractproperty
     def id_mask(self) -> int:
         pass
@@ -48,7 +63,7 @@ class Monster(RenderableObject):
         self.exploding = True
         self.explosion_animation_did_end = callback
 
-    def tick(self, ticks):
+    def tick(self, ticks: int):
         if self.selected:
             # Perform a check to see if this item was just selected.
             # This is done to start animating the icon right away, so the user doesn't think the program is frozen.

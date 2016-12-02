@@ -2,13 +2,22 @@ import curses
 
 
 class Window(object):
-    width = 800
-    height = 600
+    """
+    Window is responsible for drawing on the screen.
+    """
 
-    screen = None
-    window = None
+    width = 0
+    height = 0
+
+    screen = None  # A curses screen
+    window = None  # A curses window
 
     def __init__(self, width: int, height: int):
+        """
+        Sets desired size for our window.
+        :param width: The width we want
+        :param height: The height we want
+        """
         self.width = width
         self.height = height
 
@@ -31,8 +40,13 @@ class Window(object):
         self.window.resize(self.height, self.width)
 
     def terminal_size_ok(self) -> bool:
-        max_y, max_x = self.screen.getmaxyx()
+        """
+        Checks whether or not the user's terminal size is big enough for our program.
+        :return: True if terminal is big enough, False if it is not.
+        """
+        max_y, max_x = self.screen.getmaxyx()  # Gets the size of the user's terminal.
 
+        # If the terminal is not big enough, clear right away to avoid crashes.
         if max_y < self.height or max_x < self.width:
             self.screen.clear()
             return False
@@ -42,6 +56,7 @@ class Window(object):
     def clear_screen(self):
         """
         Clears the screen, so it's ready for new draws.
+        Also adds a border around the screen.
         :return: None
         """
         self.screen.clear()
@@ -63,18 +78,18 @@ class Window(object):
         else:
             self.window.resize(max_y, max_x)
 
-    def draw_text(self, text: str, x: int, y: int, mode=0):
+    def draw_text(self, text: str, x: int, y: int):
         """
         Draws text on the screen at coordinates.
         Note that if we don't split them by newline, the newline will render at the far left of the screen.
+            Would be different if all sprites had `\n'-line endings, but Windows adds `\r\n' as line endings.
         :param text: The text you want rendered on screen.
         :param x: x position
         :param y: y position
-        :param mode: Text mode
         :return: None
         """
         for i, string in enumerate(text.split("\n")):
-            self.safe_addstr(y+i, x, string, mode)  # Curses has reversed the standard order of x,y for some reason.
+            self.safe_addstr(y+i, x, string)  # Curses has reversed the standard order of x,y for some reason.
 
     def exit(self):
         """

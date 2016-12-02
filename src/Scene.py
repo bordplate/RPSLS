@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+
 from RenderableObject import RenderableObject
 
 
@@ -14,20 +15,19 @@ class Scene(metaclass=ABCMeta):
     height = 0
 
     @abstractmethod
-    def tick(self, ticks):
+    def tick(self, ticks: int):
+        """
+        Passes on ticks from game engine to all objects we want to have on screen.
+        :param ticks: Current engine tick count. Used to animate with different frequencies.
+        :return: None
+        """
         for game_object in self.objects:
             game_object.tick(ticks)
 
-    # TODO: Check if this method ever gets used in a scene.
-    @abstractmethod
-    def render(self): pass  # Defined in Engine.py
-
     def change_scene(self, scene):
-        pass
-
-    def scene_did_start(self):
         """
-        Fires when the current scene starts up.
+        A method that the engine overwrites with a function that changes from this scene to a specified scene.
+        :param scene: A scene to be changed to.
         :return: None
         """
         pass
@@ -35,6 +35,7 @@ class Scene(metaclass=ABCMeta):
     def scene_will_start(self):
         """
         Fires right before a scene will start, so the scene has a chance to get it's objects ready.
+        When this function is called by the engine, all Engine-setup for the scenes should have finished.
         :return: None
         """
         pass
@@ -67,9 +68,17 @@ class Scene(metaclass=ABCMeta):
             scene_object.scene = self
 
     def remove_object(self, scene_object: RenderableObject):
+        """
+        Removes a given object from the scene
+        :param scene_object: The object that should be removed from the scene.
+        :return: None
+        """
         for obj in self.objects:
             if obj == scene_object:
                 self.objects.remove(obj)
 
     def __init__(self):
+        """
+        Initiates objects as empty, to make sure no scenes start with objects already being drawn.
+        """
         self.objects = []
